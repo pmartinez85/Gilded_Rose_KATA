@@ -6,72 +6,116 @@
  * Time: 21:17
  */
 
+namespace spec\App;
+
 use App\GildedRose;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
-describe('Gilded Rose', function () {
-    describe('#tick', function () {
+/**
+ * Class agedBrieSpec
+ * @package spec\App
+ */
+class GildedRoseSpec extends ObjectBehavior
+{
+    /**
+     * Check it is initializable
+     */
+    function it_is_initializable()
+    {
+        $this->beConstructedWith('normal', 10, 5);
+        $this->shouldHaveType(GildedRose::class);
+    }
 
-        context('Backstage Passes', function () {
-            /*
-                "Backstage passes", like aged brie, increases in Quality as it's SellIn
-                value approaches; Quality increases by 2 when there are 10 days or
-                less and by 3 when there are 5 days or less but Quality drops to
-                0 after the concert
-             */
-            it('updates Backstage pass items long before the sell date', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 10, 11);
-                $item->tick();
-                expect($item->quality)->toBe(11);
-                expect($item->sellIn)->toBe(10);
-            });
-            it('updates Backstage pass items close to the sell date', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 10, 10);
-                $item->tick();
-                expect($item->quality)->toBe(12);
-                expect($item->sellIn)->toBe(9);
-            });
-            it('updates Backstage pass items close to the sell data, at max quality', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 50, 10);
-                $item->tick();
-                expect($item->quality)->toBe(50);
-                expect($item->sellIn)->toBe(9);
-            });
-            it('updates Backstage pass items very close to the sell date', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 10, 5);
-                $item->tick();
-                expect($item->quality)->toBe(13); // goes up by 3
-                expect($item->sellIn)->toBe(4);
-            });
-            it('updates Backstage pass items very close to the sell date, at max quality', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 50, 5);
-                $item->tick();
-                expect($item->quality)->toBe(50);
-                expect($item->sellIn)->toBe(4);
-            });
-            it('updates Backstage pass items with one day left to sell', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 10, 1);
-                $item->tick();
-                expect($item->quality)->toBe(13);
-                expect($item->sellIn)->toBe(0);
-            });
-            it('updates Backstage pass items with one day left to sell, at max quality', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 50, 1);
-                $item->tick();
-                expect($item->quality)->toBe(50);
-                expect($item->sellIn)->toBe(0);
-            });
-            it('updates Backstage pass items on the sell date', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 10, 0);
-                $item->tick();
-                expect($item->quality)->toBe(0);
-                expect($item->sellIn)->toBe(-1);
-            });
-            it('updates Backstage pass items after the sell date', function () {
-                $item = GildedRose::of('Backstage passes to a TAFKAL80ETC concert', 10, -1);
-                $item->tick();
-                expect($item->quality)->toBe(0);
-                expect($item->sellIn)->toBe(-2);
-            });
-        });
-    });
-});
+    /**
+     * Check it updates Backstage pass items long before the sell date
+     */
+    function it_updates_BackstagePassItems_long_before_sell_date()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',10,11);
+        $this->tick();
+        $this->quality->shouldBe(11);
+        $this->sellIn->shouldBe(10);
+    }
+    /**
+     * Check it updates Backstage pass items close to the sell date
+     */
+    function it_updates_BackstagePassItems_close_to_sell_date()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',10,10);
+        $this->tick();
+        $this->quality->shouldBe(12);
+        $this->sellIn->shouldBe(9);
+    }
+    /**
+     * Check it updates Backstage pass items close to the sell data, at max quality
+     */
+    function it_updates_BackstagePassItems_close_sell_date_at_maxQuality()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',50,10);
+        $this->tick();
+        $this->quality->shouldBe(50);
+        $this->sellIn->shouldBe(9);
+    }
+    /**
+     * Check it updates Backstage pass items very close to the sell date
+     */
+    function it_updates_BackstagePassItems_veryCloseToSell_date()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',10,5);
+        $this->tick();
+        $this->quality->shouldBe(13);
+        $this->sellIn->shouldBe(4);
+    }
+    /**
+     * Check it updates Backstage pass items very close to the sell data, at max quality
+     */
+    function it_updates_BackstagePassItems_veryCloseSell_date_at_maxQuality()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',50,5);
+        $this->tick();
+        $this->quality->shouldBe(50);
+        $this->sellIn->shouldBe(4);
+    }
+    /**
+     * Check it updates Backstage pass items with one day left to sell
+     */
+    function it_updates_BackstagePassItems_with_oneDayLefToSell()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',10,1);
+        $this->tick();
+        $this->quality->shouldBe(13);
+        $this->sellIn->shouldBe(0);
+    }
+    /**
+     * Check it updates Backstage pass items with one day left to sell, at max quality
+     */
+    function it_updates_BackstagePassItems_with_oneDayLefToSell_at_maxQuality()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',50,1);
+        $this->tick();
+        $this->quality->shouldBe(50);
+        $this->sellIn->shouldBe(0);
+    }
+    /**
+     * Check it updates Backstage pass items on the sell date
+     */
+    function it_updates_BackstagePassItems_on_sell_date()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',10,0);
+        $this->tick();
+        $this->quality->shouldBe(0);
+        $this->sellIn->shouldBe(-1);
+    }
+    /**
+     * Check it updates Backstage pass items after the sell date
+     */
+    function it_updates_BackstagePassItems_after_sell_date()
+    {
+        $this->beConstructedWith('Backstage passes to a TAFKAL80ETC concert',10,-1);
+        $this->tick();
+        $this->quality->shouldBe(0);
+        $this->sellIn->shouldBe(-2);
+    }
+
+}
