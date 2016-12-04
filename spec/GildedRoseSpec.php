@@ -9,7 +9,6 @@ use Prophecy\Argument;
 /**
  * Class GildedRoseSpec
  * @package spec\App
- * @group normal
  */
 class GildedRoseSpec extends ObjectBehavior
 {
