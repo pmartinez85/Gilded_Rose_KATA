@@ -2,6 +2,10 @@
 
 namespace App;
 
+/**
+ * Class GildedRose
+ * @package App
+ */
 class GildedRose
 {
     public $name;
@@ -10,6 +14,12 @@ class GildedRose
 
     public $sellIn;
 
+    /**
+     * GildedRose constructor.
+     * @param $name
+     * @param $quality
+     * @param $sellIn
+     */
     public function __construct($name, $quality, $sellIn)
     {
         $this->name = $name;
@@ -17,57 +27,46 @@ class GildedRose
         $this->sellIn = $sellIn;
     }
 
-    public static function of($name, $quality, $sellIn) {
-        return new static($name, $quality, $sellIn);
-    }
 
     public function tick()
     {
-        if ($this->name != 'Aged Brie' and $this->name != 'Backstage passes to a TAFKAL80ETC concert') {
-            if ($this->quality > 0) {
-                if ($this->name != 'Sulfuras, Hand of Ragnaros') {
-                    $this->quality = $this->quality - 1;
-                }
-            }
-        } else {
-            if ($this->quality < 50) {
-                $this->quality = $this->quality + 1;
-
-                if ($this->name == 'Backstage passes to a TAFKAL80ETC concert') {
-                    if ($this->sellIn < 11) {
-                        if ($this->quality < 50) {
-                            $this->quality = $this->quality + 1;
-                        }
-                    }
-                    if ($this->sellIn < 6) {
-                        if ($this->quality < 50) {
-                            $this->quality = $this->quality + 1;
-                        }
-                    }
-                }
-            }
-        }
-
-        if ($this->name != 'Sulfuras, Hand of Ragnaros') {
-            $this->sellIn = $this->sellIn - 1;
-        }
-
-        if ($this->sellIn < 0) {
-            if ($this->name != 'Aged Brie') {
-                if ($this->name != 'Backstage passes to a TAFKAL80ETC concert') {
-                    if ($this->quality > 0) {
-                        if ($this->name != 'Sulfuras, Hand of Ragnaros') {
-                            $this->quality = $this->quality - 1;
-                        }
-                    }
-                } else {
-                    $this->quality = $this->quality - $this->quality;
-                }
-            } else {
-                if ($this->quality < 50) {
+        switch ($this->name){
+            case 'Aged Brie':
+                if ($this->quality < 50)
                     $this->quality = $this->quality + 1;
+                $this->sellIn = $this->sellIn - 1;
+                if (($this->sellIn < 0) && ($this->quality < 50)) {$this->quality = $this->quality + 1;}
+                break;
+            case 'Conjured Mana Cake':
+                if ($this->quality > 0)
+                    $this->quality = $this->quality - 2;
+                $this->sellIn = $this->sellIn - 1;
+                if (($this->sellIn < 0) && ($this->quality > 0)){$this->quality = $this->quality - 2;}
+                break;
+            case 'Backstage passes to a TAFKAL80ETC concert':
+                if (($this->quality < 50) || (($this->sellIn < 11) && ($this->quality < 50)) || (($this->sellIn < 6) && ($this->quality < 50)))
+                    $this->quality = $this->quality + 1;
+                $this->sellIn = $this->sellIn - 1;
+                if ($this->sellIn < 0) {$this->quality = $this->quality - $this->quality;}
+                break;
+            case 'Sulfuras, Hand of Ragnaros':
+                break;
+            default:
+                if ($this->quality > 0)
+                    $this->quality = $this->quality - 1;
+                $this->sellIn = $this->sellIn - 1;
+                if (($this->sellIn < 0) && ($this->quality > 0)) {
+                        $this->quality = $this->quality - 1;
                 }
-            }
         }
     }
+
+
+
+
+
+
+
+
+
 }
