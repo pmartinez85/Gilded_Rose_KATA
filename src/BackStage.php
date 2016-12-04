@@ -9,6 +9,10 @@
 namespace App;
 
 
+/**
+ * Class BackStage
+ * @package App
+ */
 class BackStage
 {
 

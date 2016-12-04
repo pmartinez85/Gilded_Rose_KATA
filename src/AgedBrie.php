@@ -9,6 +9,10 @@
 namespace App;
 
 
+/**
+ * Class AgedBrie
+ * @package App
+ */
 class AgedBrie
 {
 

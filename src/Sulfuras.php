@@ -9,6 +9,10 @@
 namespace App;
 
 
+/**
+ * Class Sulfuras
+ * @package App
+ */
 class Sulfuras
 {
 

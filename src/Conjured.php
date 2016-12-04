@@ -9,6 +9,10 @@
 namespace App;
 
 
+/**
+ * Class Conjured
+ * @package App
+ */
 class Conjured
 {
 
