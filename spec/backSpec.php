@@ -6,6 +6,8 @@
  * Time: 21:17
  */
 
+use App\GildedRose;
+
 context('Backstage Passes', function () {
     /*
         "Backstage passes", like aged brie, increases in Quality as it's SellIn

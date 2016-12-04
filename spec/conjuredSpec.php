@@ -7,7 +7,9 @@
  */
 
 
- context ("Conjured Items", function () {
+use App\GildedRose;
+
+context ("Conjured Items", function () {
      it ('updates Conjured items before the sell date', function () {
          $item = GildedRose::of('Conjured Mana Cake', 10, 10);
          $item->tick();

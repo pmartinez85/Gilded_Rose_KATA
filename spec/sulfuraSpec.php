@@ -6,6 +6,8 @@
  * Time: 21:17
  */
 
+use App\GildedRose;
+
 context('Sulfuras Items', function () {
     it ('updates Sulfuras items before the sell date', function () {
         $item = GildedRose::of('Sulfuras, Hand of Ragnaros', 10, 5);

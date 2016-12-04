@@ -6,6 +6,8 @@
  * Time: 21:18
  */
 
+use App\GildedRose;
+
 context ('normal Items', function () {
     it ('updates normal items before sell date', function () {
         $item = GildedRose::of('normal', 10, 5); // quality, sell in X days

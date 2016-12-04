@@ -6,6 +6,8 @@
  * Time: 21:17
  */
 
+use App\GildedRose;
+
 context('Brie Items', function () {
     it ('updates Brie items before the sell date', function () {
         $item = GildedRose::of('Aged Brie', 10, 5);
