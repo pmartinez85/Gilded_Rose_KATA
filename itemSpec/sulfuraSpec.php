@@ -13,7 +13,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * Class agedBrieSpec
+ * Class sulfuraSpec
  * @package spec\App
  */
 class GildedRoseSpec extends ObjectBehavior
